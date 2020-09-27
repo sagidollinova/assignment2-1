@@ -43,6 +43,7 @@ public class FileUpload extends HttpServlet {
             }*/
             Iterator iter = files.iterator();
 
+
             // iterates over form's fields
             while (iter.hasNext()) {
                 FileItem fi = (FileItem)iter.next();

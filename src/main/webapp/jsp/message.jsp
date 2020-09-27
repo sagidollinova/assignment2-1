@@ -9,7 +9,6 @@
             <h4>File name: ${requestScope.fileName}</h4>
 
             <h4>File size: ${requestScope.fileSize}</h4>
-
         </div>
     </div>
 </div>
