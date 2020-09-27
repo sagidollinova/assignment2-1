@@ -17,56 +17,31 @@ import java.util.List;
 public class FileUpload extends HttpServlet {
     private boolean isMultipart;
     private String filePath;
-    private int maxFileSize = 50 * 1024;
-    private int maxMemSize = 4 * 1024;
     private File file ;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("file uploading...");
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload sf = new ServletFileUpload(factory);
         try {
-            String uploadPath = getServletContext().getRealPath("")
-                    + File.separator + "C:\\apache-tomcat-9.0.37\\webapps\\data\\";
+
+            List<FileItem> files = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+
+            StringBuilder uploadPath = new StringBuilder("D:\\DISKS\\database\\data\\");
             // creates the directory if it does not exist
-            File uploadDir = new File(uploadPath);
+            filePath = uploadPath.toString();
+            File uploadDir = new File(filePath);
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdirs();
             }
-            List<FileItem> files = sf.parseRequest(request);
-            String names = "";
-            /*for(FileItem item : files)
+
+            for(FileItem item : files)
             {
-                item.write(new File("D:\\JAVA\\3week3\\" + item.getName()));
-                names += item.getName() + " ";
-
-            }*/
-            Iterator iter = files.iterator();
-
-
-            // iterates over form's fields
-            while (iter.hasNext()) {
-                FileItem fi = (FileItem)iter.next();
-                if ( !fi.isFormField () ) {
-                    // Get the uploaded file parameters
-                    String fieldName = fi.getFieldName();
-                    String fileName = fi.getName();
-                    String contentType = fi.getContentType();
-                    boolean isInMemory = fi.isInMemory();
-                    long sizeInBytes = fi.getSize();
-                    request.setAttribute("fileName", fileName);
-                    request.setAttribute("fileSize", sizeInBytes);
-
-                    // Write the file
-                    if( fileName.lastIndexOf("\\") >= 0 ) {
-                        file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
-                    } else {
-                        file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\") + 1)) ;
-                    }
-                    fi.write( file ) ;
-                    System.out.println("test");
-                }
+                String fileName = item.getName();
+                long size = item.getSize();
+                request.setAttribute("fileName", fileName);
+                request.setAttribute("fileSize", size);
+                item.write(new File(filePath + fileName));
             }
+
 
             System.out.println("file uploaded!!!");
 

@@ -19,4 +19,22 @@
         <servlet-name>FileUpload</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowFiles</servlet-name>
+        <servlet-class>ShowFiles</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowFiles</servlet-name>
+        <url-pattern>/showFiles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteFile</servlet-name>
+        <servlet-class>DeleteFile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteFile</servlet-name>
+        <url-pattern>/deleteFile</url-pattern>
+    </servlet-mapping>
 </web-app>
