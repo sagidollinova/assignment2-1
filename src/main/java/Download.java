@@ -15,24 +15,29 @@ public class Download extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String fileName = request.getParameter("option");
+        String[] s = request.getParameterValues("files");
 
-        File file = new File("D:\\DISKS\\database\\data\\");
+        for (String fileName : s)
+        {
+            fileName = fileName.substring(0, fileName.lastIndexOf("|") - 2);
+            File file = new File("D:\\DISKS\\database\\data\\" + fileName);
 
-        if (file.exists()) {
-            response.setContentType("application/octet-stream");
-            response.setContentLength((int) file.length());
+            if (file.exists()) {
+                response.setContentType("application/octet-stream");
+                response.setContentLength((int) file.length());
 
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
-            FileInputStream in = new FileInputStream(file);
+                FileInputStream in = new FileInputStream(file);
 
-            int i;
-            while ((i = in.read()) != -1) {
-                out.write(i);
+                int i;
+                while ((i = in.read()) != -1) {
+                    out.write(i);
+                }
+                in.close();
+                out.close();
             }
-            in.close();
-            out.close();
         }
+
     }
 }

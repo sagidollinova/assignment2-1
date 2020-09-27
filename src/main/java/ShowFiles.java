@@ -19,7 +19,7 @@ public class ShowFiles extends HttpServlet {
         List<String> content = new ArrayList<>();
         for (File f : files)
         {
-            String asd = f.getName() + " (" + f.length()/1024 + "KB)";
+            String asd = f.getName() + " | (" + f.length()/1024 + "KB)";
             content.add(asd);
         }
         request.setAttribute("allFiles", content);
