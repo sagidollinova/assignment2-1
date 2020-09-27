@@ -21,7 +21,8 @@
                     i++;
                 }
             %>
-                <button type="submit" class="btn btn-primary" id="submitbtn">Delete</button>
+                <button type="submit" class="btn btn-primary" id="deleteBtn">Delete</button>
+                <button type="submit" class="btn btn-primary" id="downloadBtn">Download</button>
             </form>
         </div>
         <a href="http://localhost:8080/3week3_war_exploded/">Main page</a>
